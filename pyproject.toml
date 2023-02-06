@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "customyou"
+version = "0.1.0"
+description = "Record your body health"
+authors = ["LazyDragon1123 <lightwalkwithme@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.1.6"
+djangorestframework = "^3.14.0"
+mysqlclient = "^2.1.1"
+django-mysql = "^4.8.0"
+django-cors-headers = "^3.13.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
