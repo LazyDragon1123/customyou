@@ -1,0 +1,18 @@
+export const Palette = {
+    BRAND_0: '#1E73D9',
+    TEAL_500: '#38A169',
+    TEAL_600: '#2C7A7B',
+    BLUE_500: '#3182CE',
+    BLUE_600: '#2B6CB0',
+    RED_50: '#FFF5F5',
+    RED_500: '#E53E3E',
+    GRAY_0: '#FFFFFF',
+    GRAY_50: '#F7FAFC',
+    GRAY_100: '#EDF2F7',
+    GRAY_200: '#E2E8F0',
+    GRAY_300: '#CBD5E0',
+    GRAY_400: '#A0AEC0',
+    GRAY_500: '#718096',
+    GRAY_600: '#425771',
+    GRAY_700: '#2D3748',
+  }
