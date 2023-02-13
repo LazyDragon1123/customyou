@@ -1,15 +1,9 @@
 from django.db import models
-from markdownx.models import MarkdownxField
 
 
 class Daily(models.Model):
     date = models.DateField()
-    univ = MarkdownxField()
-    study = MarkdownxField()
-    other = MarkdownxField()
-    first_meet = MarkdownxField()
-    wanna_do = MarkdownxField()
-    summary = MarkdownxField()
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
     evaluation = models.ForeignKey('Evaluation', on_delete=models.PROTECT)
     isOpen = models.BooleanField(default=True)
 

@@ -29,23 +29,19 @@ class DetailDaily(APIView):
             try:
                 daily = Daily.objects.get(id=pk)
             except:
-                error_msg = "そんなidの日報はないよ！"
+                error_msg = f"no data with id = {pk} found"
                 return Response(error_msg, status=status.HTTP_404_NOT_FOUND)
             res = {
                 'id': daily.id,
                 'date': daily.date,
-                'study': daily.study,
-                'other': daily.other,
-                'first_meet': daily.first_meet,
-                'wanna_do': daily.wanna_do,
-                'summary': daily.summary,
+                'weight': daily.weight,
             }
             return Response(res)
         except:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class CategoryDairy(APIView):
+class CategoryDaily(APIView):
     def get(self, request, cat):
         try:
             daily = Daily.objects.filter(isOpen=True).values_list(
