@@ -1,18 +1,20 @@
-import React from 'react'
-import {getDaily } from "api/backend/healthybody";
+import React, {useState, useEffect} from 'react'
+import {healthBodyAxios, getDailyList } from "api/axios/healthybody";
 
 export const Top: React.FC = () => {
-    // const [daily, setDaily] = useState<[]>()
-    const daily = getDaily()
-    console.log(daily)
-    const temp = 2
-    // useEffect(() => {
-    //     const temp = getDaily
-    //     setDaily(temp)
-    //   }, [])
+    const [daily, setDaily] = useState<4>()
+    // const [detail, setDetail] = useState<[]>()
+
+    useEffect(() => {
+        async function fetchData() {
+        const response = await healthBodyAxios.get(getDailyList())
+        setDaily(response.data[2].date)
+        }
+    fetchData();
+    }, [])
     return(
         <div>
-            <h1>{temp}</h1>
+            <h1>{daily}</h1>
         </div>
     )
 }

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  openapi-update-frontend:
+    container_name: openapi-update-frontend
+    image: openapitools/openapi-generator-cli:v6.3.0
+    volumes:
+      - ./frontend/customu/src/api/schema:/frontend
+      - ./openapi:/openapi
+    command: generate -g typescript-axios -o ./frontend -i ./openapi/healthybody.yaml
