@@ -8,7 +8,7 @@ export const Top: React.FC = () => {
     useEffect(() => {
         async function fetchData() {
         const response = await healthBodyAxios.get(getDailyList())
-        setDaily(response.data[2].date)
+        setDaily(response.data[2].evaluation)
         }
     fetchData();
     }, [])
