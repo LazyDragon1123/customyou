@@ -12,5 +12,5 @@ export const getDailyList = () => {
 
 
 export const getDailyDetail = (id: Number) => {
-    return  "/healthybody/" + `${id}`
+    return  `/healthybody/${id}`
 }
