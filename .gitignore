@@ -1,3 +1,6 @@
 .dbdate
 __pycache__
 .vscode
+.venv
+.mypy_cache
+db.sqlite3

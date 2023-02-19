@@ -1,4 +1,4 @@
-PYTHON_VERSION=py39
+PYTHON_VERSION=py311
 
 format: ## Format codes
 	poetry run autoflake --in-place --remove-unused-variables --remove-all-unused-imports --recursive .

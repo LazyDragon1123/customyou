@@ -11,6 +11,6 @@ export const getDailyList = () => {
 }
 
 
-export const getDailyDetail = (id: Number) => {
-    return  `/healthybody/${id}`
+export const getDailyDetail = (date: String) => {
+    return  `/healthybody/${date}`
 }

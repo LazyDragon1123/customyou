@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { healthBodyAxios, getDailyList } from "api/axios/healthybody"
 import { DailyListData } from "api/interface/healthybody"
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Center, Box, Flex, Heading } from '@chakra-ui/react'
 
 export const Top: React.FC = () => {
     const [daily, setDaily] = useState<[]>()
@@ -14,18 +14,17 @@ export const Top: React.FC = () => {
     fetchData();
     }, [])
     return(
-        <div>
+        <Center>
             <Flex basis="50%" wrap="wrap">
             {daily?.map((item: DailyListData, index: number) => (
               <Box key={`line-${index}`} width="50%">
                 <Heading as="h3" fontSize="16px">
-                  {item.id}
                   {item.date}
-                  {item.evaluation}
+                  {item.weight}
                 </Heading>
               </Box>
             ))}
             </Flex>
-        </div>
+        </Center>
     )
 }

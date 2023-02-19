@@ -1,5 +1,6 @@
 export interface DailyListData {
-    id: String,
     date: String,
-    evaluation: String,
+    weight: String,
+    section: String,
+    isOpen: String,
 }
