@@ -12,10 +12,12 @@ class DailySerializer(serializers.ModelSerializer):
 class DailyListSerializer(serializers.ListSerializer):
     child = DailySerializer()
 
+
 class MachoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Macho
         fields = ("id", "section")
+
 
 class MachoListSerializer(serializers.ListSerializer):
     child = MachoSerializer()

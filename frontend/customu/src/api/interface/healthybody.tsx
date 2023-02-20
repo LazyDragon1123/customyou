@@ -1,6 +1,6 @@
 export interface DailyListData {
-    date: String,
-    weight: String,
-    section: String,
-    isOpen: String,
+    date: string,
+    weight: string,
+    section: string,
+    isOpen: string,
 }
