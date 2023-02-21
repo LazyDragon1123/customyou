@@ -74,18 +74,29 @@ export const Top: React.FC = () => {
     const handleSubmit = () => {
       postData().then(() => {
         fetchData()
-        fetchSectionMap()
-        fetchWeights()
-        fetchSections()
-      })
-    }
+          .then(() => {
+          fetchSectionMap()
+            .then(() => {
+              fetchWeights()
+                .then(() => {
+                  fetchSections()
+                })
+              })
+            })
+          })
+        }
 
     const handleUpdate = () => {
       putData(dailyPost.date).then(() => {
-        fetchData()
-        fetchSectionMap()
-        fetchWeights()
-        fetchSections()
+        fetchData().then(() => {
+          fetchSectionMap()
+            .then(() => {
+              fetchWeights()
+               .then(() => {
+                fetchSections()
+               })
+            })
+        })
       })
       .catch(error => {
         window.alert(error)
@@ -208,6 +219,8 @@ export const Top: React.FC = () => {
               },
               yAxis: {
                 type: 'value',
+                max: 85,
+                min: 65,
                 axisLabel: {
                   formatter: '{value} kg'
                 }
@@ -228,7 +241,7 @@ export const Top: React.FC = () => {
                 left: 'center',
                 text: year
               },
-              tooltip: {},
+              // tooltip: {},
               visualMap: {
                 min: 0,
                 max: 7,
