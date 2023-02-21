@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { healthBodyAxios, getDailyList, createDaily, getMachoList, getByCateogry } from "api/axios/healthybody"
+import { healthBodyAxios, getDailyList, createDaily, getMachoList, getByCateogry, getDailyDetail } from "api/axios/healthybody"
 import { DailyListData, BodySectionData, WeightsData, SectionsData } from "api/interface/healthybody"
 import { Center, Box, Flex, Heading, Select, VStack, FormLabel, Input, Button } from '@chakra-ui/react'
 import { SectionBox } from "components/SectionBox"
@@ -45,6 +45,12 @@ export const Top: React.FC = () => {
       window.alert("Sent")
       }
 
+    async function putData(date: string) {
+      window.alert(date)
+      const response = await healthBodyAxios.put(getDailyDetail(date), dailyPost)
+      console.log(response.data)
+      window.alert("update")
+      }
     async function fetchData() {
       const response = await healthBodyAxios.get(getDailyList())
       setDaily(response.data)
@@ -66,7 +72,24 @@ export const Top: React.FC = () => {
       }
 
     const handleSubmit = () => {
-      postData()
+      postData().then(() => {
+        fetchData()
+        fetchSectionMap()
+        fetchWeights()
+        fetchSections()
+      })
+    }
+
+    const handleUpdate = () => {
+      putData(dailyPost.date).then(() => {
+        fetchData()
+        fetchSectionMap()
+        fetchWeights()
+        fetchSections()
+      })
+      .catch(error => {
+        window.alert(error)
+      })
     }
 
     function id_to_section(num: string) {
@@ -170,7 +193,6 @@ export const Top: React.FC = () => {
               </Box>
             ))}
             </Flex>
-            
             <H2> Dashboard </H2>
             <H3 mt={4}> Weight </H3>
             <ReactECharts
@@ -294,6 +316,9 @@ export const Top: React.FC = () => {
 
             <Button mt={4} colorScheme="teal" onClick={handleSubmit}>
                   Submit
+            </Button>
+            <Button mt={4} onClick={handleUpdate}>
+                  Update
             </Button>
           </SectionBox>
           </Box>

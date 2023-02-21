@@ -25,7 +25,7 @@ export const createDaily = () => {
 }
 
 export const getDailyDetail = (date: String) => {
-    return  `daily/${date}`
+    return  `daily/${date}/`
 }
 
 export const getMachoList = () => {
