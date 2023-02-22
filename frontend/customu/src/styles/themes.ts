@@ -19,21 +19,12 @@ export const Color = {
   HELP_HEADER: Palette.TEAL_600,
 }
 
-// const colors = {
-//   blue: {
-//     500: Color.BRAND_0,
-//   },
-//   teal: {
-//     500: Color.PRIMARY_0,
-//   },
-// }
-
 export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        backgroundColor: "gray.100",
-        color: "gray.800"
+        backgroundColor: "green.50",
+        color: "green.800"
       }
     }
   }

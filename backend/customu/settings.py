@@ -43,8 +43,8 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
     ]
 }
 
@@ -61,9 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-)
+CORS_ORIGIN_WHITELIST = ("http://localhost:3000",)
 
 ROOT_URLCONF = "customu.urls"
 
