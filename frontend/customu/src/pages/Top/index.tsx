@@ -42,14 +42,14 @@ export const Top: React.FC = () => {
     async function postData() {
       const response = await healthBodyAxios.post(createDaily(), dailyPost)
       console.log(response.data)
-      window.alert("Sent")
+      window.alert("Sent Success")
       }
 
     async function putData(date: string) {
       window.alert(date)
       const response = await healthBodyAxios.put(getDailyDetail(date), dailyPost)
       console.log(response.data)
-      window.alert("update")
+      window.alert("Update Success")
       }
     async function fetchData() {
       const response = await healthBodyAxios.get(getDailyList())
@@ -113,10 +113,13 @@ export const Top: React.FC = () => {
     }
 
     useEffect(() => {
-      fetchData()
-      fetchSectionMap()
-      fetchWeights()
-      fetchSections()
+      fetchData().then(() => {
+        fetchSectionMap().then(() => {
+          fetchWeights().then(() => {
+            fetchSections()
+          })
+        })
+      })
     }, [])
 
 
