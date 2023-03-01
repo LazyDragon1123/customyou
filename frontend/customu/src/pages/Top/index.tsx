@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { healthBodyAxios, getDailyList, createDaily, getMachoList, getByCateogry, getDailyDetail } from "api/axios/healthybody"
+import { healthBodyAxios, createDaily, getMachoList, getByCateogry, getDailyDetail } from "api/axios/healthybody"
 import { DailyListData, BodySectionData, WeightsData, SectionsData } from "api/interface/healthybody"
-import { Center, Box, Flex, Heading, Select, VStack, FormLabel, Input, Button } from '@chakra-ui/react'
+import { Center, Box, Select, VStack, FormLabel, Input, Button } from '@chakra-ui/react'
 import { SectionBox } from "components/SectionBox"
 import { H2, H3 } from "components/Head";
 import { css } from '@emotion/react'
@@ -28,7 +28,6 @@ const sectionGroup = {
 }
 
 export const Top: React.FC = () => {
-    const [daily, setDaily] = useState<[]>()
     const [weights, setWeights] = useState<[]>()
     const [sections, setSections] = useState<[]>()
     const [sectionRaw, setsectionRaw] = useState<[]>()
@@ -46,14 +45,9 @@ export const Top: React.FC = () => {
       }
 
     async function putData(date: string) {
-      window.alert(date)
       const response = await healthBodyAxios.put(getDailyDetail(date), dailyPost)
       console.log(response.data)
       window.alert("Update Success")
-      }
-    async function fetchData() {
-      const response = await healthBodyAxios.get(getDailyList())
-      setDaily(response.data)
       }
 
     async function fetchWeights() {
@@ -73,8 +67,6 @@ export const Top: React.FC = () => {
 
     const handleSubmit = () => {
       postData().then(() => {
-        fetchData()
-          .then(() => {
           fetchSectionMap()
             .then(() => {
               fetchWeights()
@@ -83,12 +75,10 @@ export const Top: React.FC = () => {
                 })
               })
             })
-          })
         }
 
     const handleUpdate = () => {
       putData(dailyPost.date).then(() => {
-        fetchData().then(() => {
           fetchSectionMap()
             .then(() => {
               fetchWeights()
@@ -96,7 +86,6 @@ export const Top: React.FC = () => {
                 fetchSections()
                })
             })
-        })
       })
       .catch(error => {
         window.alert(error)
@@ -113,13 +102,11 @@ export const Top: React.FC = () => {
     }
 
     useEffect(() => {
-      fetchData().then(() => {
         fetchSectionMap().then(() => {
           fetchWeights().then(() => {
             fetchSections()
           })
         })
-      })
     }, [])
 
 
@@ -196,17 +183,7 @@ export const Top: React.FC = () => {
           <VStack w="60vw">
           <Box w="90%">
             <SectionBox css={content}>
-            <Flex basis="50%" wrap="wrap">
-            {daily?.map((item: DailyListData, index: number) => (
-              <Box key={`line-${index}`} width="50%">
-                <Heading as="h3" fontSize="1px">
-                  {/* {item.date}
-                  {item.weight} */}
-                  {item.section}
-                </Heading>
-              </Box>
-            ))}
-            </Flex>
+
             <H2> Dashboard </H2>
             <H3 mt={4}> Weight </H3>
             <ReactECharts
@@ -222,8 +199,8 @@ export const Top: React.FC = () => {
               },
               yAxis: {
                 type: 'value',
-                max: 85,
-                min: 65,
+                max: 80,
+                min: 70,
                 axisLabel: {
                   formatter: '{value} kg'
                 }
