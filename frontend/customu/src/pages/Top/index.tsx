@@ -37,6 +37,8 @@ export const Top: React.FC = () => {
     const [sectionsData, setSectionsData] = useState<string[]>()
     const [datesSectionData, setDatesSectionData] = useState<string[]>()
     const [calendarData, setCalendarData] = useState<[string, number][]>()
+    const [minweight, setMinWeight] = useState<number>(70)
+    const [maxweight, setMaxWeight] = useState<number>(80)
 
     async function postData() {
       const response = await healthBodyAxios.post(createDaily(), dailyPost)
@@ -110,14 +112,20 @@ export const Top: React.FC = () => {
         })
     }, [])
 
-
-    // For weight graph
     useEffect(() => {
       const weightsTemp: number[] = []
       const datesTemp: string[] = []
+      let min_weight: number = 75
+      let max_weight: number = 75
       weights?.forEach((elem: WeightsData, index) => {
         weightsTemp.push(elem.weight)
         datesTemp.push(elem.date)
+        if (min_weight < elem.weight) {
+          min_weight = elem.weight
+        }
+        if (max_weight > elem.weight) {
+          max_weight = elem.weight
+        }
         // set initial weights
         if (index === 0) {
         setDailyPost({...dailyPost, weight: String(elem.weight) ?? "74.00"})
@@ -126,6 +134,8 @@ export const Top: React.FC = () => {
     )
       setWeightsData(weightsTemp.reverse())
       setDatesData(datesTemp.reverse())
+      setMinWeight(min_weight)
+      setMaxWeight(max_weight)
       }, [weights])
 
     // For body section calendar
@@ -204,8 +214,8 @@ export const Top: React.FC = () => {
               },
               yAxis: {
                 type: 'value',
-                max: 80,
-                min: 70,
+                max: maxweight,
+                min: minweight,
                 axisLabel: {
                   formatter: '{value} kg'
                 }
