@@ -11,7 +11,7 @@ import * as echarts from 'echarts';
 
 const dailyPostInitialValue = {
   date: "2023-02-01",
-  weight: "75.00",
+  weight: "74.00",
   section: "9",
   isOpen: "true"
 }
@@ -101,6 +101,7 @@ export const Top: React.FC = () => {
       return section
     }
 
+    // For section
     useEffect(() => {
         fetchSectionMap().then(() => {
           fetchWeights().then(() => {
@@ -114,14 +115,18 @@ export const Top: React.FC = () => {
     useEffect(() => {
       const weightsTemp: number[] = []
       const datesTemp: string[] = []
-      weights?.forEach((elem: WeightsData) => {
+      weights?.forEach((elem: WeightsData, index) => {
         weightsTemp.push(elem.weight)
         datesTemp.push(elem.date)
+        // set initial weights
+        if (index === 0) {
+        setDailyPost({...dailyPost, weight: String(elem.weight) ?? "74.00"})
+        }
       }
     )
-    setWeightsData(weightsTemp.reverse())
-    setDatesData(datesTemp.reverse())
-    }, [weights])
+      setWeightsData(weightsTemp.reverse())
+      setDatesData(datesTemp.reverse())
+      }, [weights])
 
     // For body section calendar
     function sectionGroupToNumeric(section: string): number {
